@@ -93,65 +93,55 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h1><p>环境： Win10<br>步骤：<br>    1.下载Git,直接去官网下载<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">地址</a><br>    2.下载Node.js，同样在官网上下载<a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">地址</a><br>    3.启动Git,在命令行中执行以下命令:<code>npm install -g hexo-cli</code>下载Hexo<br>    4.找到自己希望放置博客的文件夹下， 执行<code>Hexo init</code><br>    5.执行<code>Hexo generate</code>, <code>Hexo deploy</code>,<code>Hexo server</code>, 在浏览器中输入<code>localhost:4000</code>就可以查看。<br>    6.要想让别人也看得见，必须将Hexo部署到GitHub上。创建GitHub仓库，名字为user_name.github.io<br>    7.利用<code>git remote add origin 远程仓库的地址</code>将本地的仓库添加到远程仓库中<br>    8.修改本地目录下的文件_comfig.yml，在最后添加：<br>        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">		　　repository: http&#x2F;&#x2F;github.com&#x2F;user_name&#x2F;user_name.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure><br>    9.然后将目录下的文件上传到远程仓库中：<code>git push -u origin master</code><br>    10.执行以下指令完成部署：<br>        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure><br>    11.添加新文章步骤：<br>       1. hexo new <titile>    在source/_posts目录下创建md文件<br>       2. hexo clean           清除缓存文件 (db.json) 和已生成的静态文件 (public)。<br>       3. hexo generate        生成静态文件<br>       4. hexo deploy          部署到GitHub上<br>#后记<br>    部署过程十分简单，如果报错百度就可以解决，本文主要参考了以下文章：<br>    <a href="https://www.imooc.com/wenda/detail/402086" target="_blank" rel="noopener">hexo init命令时，出现错误，该怎么办？</a><br>    <a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo官方文档</a><br>    <a href="https://www.jianshu.com/p/390f202c5b0e" target="_blank" rel="noopener">5分钟搞定个人博客-hexo</a></p>
+        <h1 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h1><h2 id="环境：-Win10"><a href="#环境：-Win10" class="headerlink" title="环境： Win10"></a>环境： Win10</h2><h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><ol>
+<li><p>下载Git,直接去官网下载<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">地址</a></p>
+</li>
+<li><p>下载Node.js，同样在官网上下载<a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">地址</a></p>
+</li>
+<li><p>启动Git,在命令行中执行以下命令:<code>npm install -g hexo-cli</code>下载Hexo</p>
+</li>
+<li><p>找到自己希望放置博客的文件夹下， 执行<code>Hexo init</code></p>
+</li>
+<li><p>执行<code>Hexo generate</code>, <code>Hexo deploy</code>,<code>Hexo server</code>, 在浏览器中输入<code>localhost:4000</code>就可以查看。</p>
+</li>
+<li><p>要想让别人也看得见，必须将Hexo部署到GitHub上。创建GitHub仓库，名字为user_name.github.io</p>
+</li>
+<li><p>利用<code>git remote add origin 远程仓库的地址</code>将本地的仓库添加到远程仓库中</p>
+</li>
+<li><p>修改本地目录下的文件_comfig.yml，在最后添加：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repository: https:&#x2F;&#x2F;github.com&#x2F;user_name&#x2F;user_name.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></li>
+<li><p>然后将目录下的文件上传到远程仓库中：<code>git push -u origin master</code></p>
+</li>
+<li><p>执行以下指令完成部署：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></li>
+<li><p>添加新文章步骤：</p>
+<ol>
+<li><p>hexo new <titile> ：   在source/_posts目录下创建md文件</p>
+</li>
+<li><p>hexo clean：           清除缓存文件 (db.json) 和已生成的静态文件 (public)。</p>
+</li>
+<li><p>hexo generate：        生成静态文件</p>
+</li>
+<li><p>hexo deploy：          部署到GitHub上<br>#后记<br>部署过程十分简单，如果报错百度就可以解决，本文主要参考了以下文章：</p>
+</li>
+<li><p><a href="https://www.imooc.com/wenda/detail/402086" target="_blank" rel="noopener">hexo init命令时，出现错误，该怎么办？</a></p>
+</li>
+<li><p><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo官方文档</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/390f202c5b0e" target="_blank" rel="noopener">5分钟搞定个人博客-hexo</a></p>
+</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/09/first-blog/" data-id="ck7jzcysx0000z8t9bh444ydm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/03/09/first-blog/" data-id="ck7jzrfh90000sgt9he4lfjy8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%EF%BC%9F-%E5%88%A9%E7%94%A8GitHub%E5%92%8CHexo%E6%9E%84%E5%BB%BA/" rel="tag">如何部署自己的博客系统？--利用GitHub和Hexo构建</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/09/hello-world/" class="article-date">
-  <time datetime="2020-03-09T01:30:03.552Z" itemprop="datePublished">2020-03-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/09/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/09/hello-world/" data-id="ck7jzcyt40001z8t9hl167fxg" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -205,10 +195,6 @@
         
           <li>
             <a href="/2020/03/09/first-blog/">first_blog</a>
-          </li>
-        
-          <li>
-            <a href="/2020/03/09/hello-world/">Hello World</a>
           </li>
         
       </ul>
