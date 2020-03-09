@@ -64,6 +64,210 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-first-blog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/09/first-blog/" class="article-date">
+  <time datetime="2020-03-09T03:04:30.000Z" itemprop="datePublished">2020-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/09/first-blog/">first_blog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.下载nodejs和git<br>2.创建GitHub仓库，名字为user_name.github.io<br>3.下载hexo,将本地的hexo添加到远程仓库中<br>4.hexo clean 清楚文件<br>5.hexo generate<br>6.hexo d</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/09/first-blog/" data-id="ck7jw4ty600008st94g68649a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%EF%BC%9F/" rel="tag">如何部署自己的博客系统？</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-note-md" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/03/09/note-md/" class="article-date">
+  <time datetime="2020-03-09T03:01:00.000Z" itemprop="datePublished">2020-03-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/09/note-md/">note.md</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>@[TOC](&lt;&lt; Attention is all you need &gt;&gt;阅读笔记)</p>
+<h1 id="lt-lt-Attention-is-all-you-need-gt-gt-阅读笔记"><a href="#lt-lt-Attention-is-all-you-need-gt-gt-阅读笔记" class="headerlink" title="&lt;&lt; Attention is all you need &gt;&gt;阅读笔记"></a>&lt;&lt; Attention is all you need &gt;&gt;阅读笔记</h1><p>Transformer模型打破了传统的RNN的时序限制，引入自注意力机制，可以更好的对句子<br>进行编码，关于模型的理论部分已经有很多介绍了，本文主要介绍transformer的在实现过程中遇到的问题，<br>并展示具体的实现代码。Transformer模型的结构如下图所示：</p>
+<p><img src="D:%5C%E6%AF%95%E4%B8%9A%E8%AE%BA%E6%96%87%5Csentence-embedding%5Ctransformer%5Ctransformer.bmp" alt="transformer"></p>
+<h2 id="实验环境："><a href="#实验环境：" class="headerlink" title="实验环境："></a>实验环境：</h2><ul>
+<li>tensorflow == 1.13</li>
+<li>python == 3.6<h2 id="实验细节："><a href="#实验细节：" class="headerlink" title="实验细节："></a>实验细节：</h2><h3 id="1-输入层编码"><a href="#1-输入层编码" class="headerlink" title="1.输入层编码"></a>1.输入层编码</h3></li>
+<li>无论是编码器还是解码器，输入时的编码=word embedding + position embedding</li>
+<li>其中word embedding可以是预训练好的词向量，也可以是随机初始化的向量</li>
+<li>position embedding是对应的位置编码，transformer模型打破了时序的限制，<br>可以进行并行计算，这样虽然提升了训练速度，但是如果仅利用词向量进行编码，<br>不同位置的相同词的编码是一样，显然这样做是不合理的，因为在文本中不同位置的<br>词往往对语义有不同的影响。因此，在该模型中引入了位置编码，计算公式如下所示:</li>
+</ul>
+<p><img src="" alt="正余弦函数"></p>
+<ul>
+<li><strong>位置编码的实现代码：</strong><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_position</span><span class="params">(seq_length, dim)</span>:</span></span><br><span class="line">    <span class="string">"""pe是一个seq_length*dim的矩阵，表明句子中每个单词每个维度的位置编码</span></span><br><span class="line"><span class="string">    位置编码在句子中每个位置每个维度的编码一致</span></span><br><span class="line"><span class="string">    pe是一个句子的位置编码"""</span></span><br><span class="line">    pe = np.zeros((seq_length, dim))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(seq_length):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(dim):</span><br><span class="line">            <span class="keyword">if</span> j % <span class="number">2</span> == <span class="number">0</span>:</span><br><span class="line">                pe[i][j] = math.sin(i/(<span class="number">1000</span>**(j/dim)))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                pe[i][j] = math.cos(i/(<span class="number">1000</span>**(j/dim)))</span><br><span class="line">    tf.logging.info(<span class="string">"*********************the position matrix have been created!!"</span>)</span><br><span class="line">    tf.logging.info(pe)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pe</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="2-多头注意力层"><a href="#2-多头注意力层" class="headerlink" title="2.多头注意力层"></a>2.多头注意力层</h3><ul>
+<li><p>注意力机制认为句子中每个单词对句子的编码的贡献（权重）不同，利用<br>每个句子中每个单词之间的相似性作为权重，进行加权平均。</p>
+</li>
+<li><p>具体实现过程：</p>
+<ol>
+<li>利用输入层的输入生成q,k,v（相当于添加一个全连接层）</li>
+<li>划分为多层注意力（增加不同语义空间）</li>
+<li>考虑padding那部分的权重影响，padding主要包括输入本身mask的部分<br>和句子mask的部分（解码器理论上t时刻的输出只能看到t时刻以前的结果，<br>因此需要将t时刻以后的词语mask）</li>
+</ol>
+</li>
+<li><p>transformer模型中主要包括三种注意力：</p>
+<ol>
+<li>编码器-编码器自注意力: 只需要考虑句子本身mask的那部分</li>
+<li>编码器-解码器注意力：需要考虑句子本身mask的部分和解码器中t时刻以后的部分</li>
+<li>解码器-解码器注意力：只需要考虑句子本身的mask部分</li>
+</ol>
+</li>
+<li><p>为什么点积注意力要除以深度的平方根？</p>
+<ol>
+<li>点积注意力被缩小了深度的平方根倍。这样做是因为对于较大的深度值，<br>点积的大小会增大，从而推动 softmax 函数往仅有很小的梯度的方向靠拢，<br>导致了一种很硬的（hard）softmax。</li>
+</ol>
+</li>
+<li><p>mask的技巧：利用一个特别小的数代替该位置的数值，这样在进行归一化（softmax)的时候，得到的<br>权重几乎趋近于0.</p>
+</li>
+<li><p>具体实现过程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multi_attention</span><span class="params">(inputs, masks, num_head, type, encode_output=None)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    inputs: [batch_size,seq_length,num_units]</span></span><br><span class="line"><span class="string">    masks: [batch_size,seq_length]</span></span><br><span class="line"><span class="string">    num_head: the number of head in model'</span></span><br><span class="line"><span class="string">    type:encode,decode,encode-decode三种注意力类型</span></span><br><span class="line"><span class="string">    return:  [batch_size,seq_length,num_units]</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    min_num = <span class="number">-2</span>**<span class="number">32</span> + <span class="number">1</span></span><br><span class="line">    emb_dim = inputs.get_shape().as_list()</span><br><span class="line">    print(<span class="string">"*********emb_dim: "</span>, emb_dim)</span><br><span class="line">    <span class="comment"># batch_size = emb_dim[0]</span></span><br><span class="line">    seq_length = emb_dim[<span class="number">1</span>]</span><br><span class="line">    dim = emb_dim[<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">if</span> dim % num_head:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">'please make the dim/d_head is the int!! '</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 1.初始化q,k,v矩阵，相当于添加一个全连接层，将输入的维度由[batch_size,seq_length,dim]变为[batch_size,seq_length,dim//num_head]</span></span><br><span class="line">    q = tf.layers.dense(inputs, units=dim)  <span class="comment"># 全连接层,权重共享，对每个单词进行全连接，实现时所有位置单词是并行的</span></span><br><span class="line">    k = tf.layers.dense(inputs, units=dim)</span><br><span class="line">    v = tf.layers.dense(inputs, units=dim)</span><br><span class="line">    tf.logging.info(q)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 只有编码器-解码器的权重的查询值与key,value不一样</span></span><br><span class="line">    <span class="keyword">if</span> type == <span class="string">'encode-decode'</span>:</span><br><span class="line">        k = encode_output  <span class="comment"># 此时k和v是encode的输出，q是decode的输入</span></span><br><span class="line">        v = encode_output</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 切分为多头,q_:[batch_size*num_head,seq_length,dim/num_head]</span></span><br><span class="line">    q_ = tf.concat(tf.split(q, num_head, axis=<span class="number">2</span>), axis=<span class="number">0</span>)</span><br><span class="line">    k_ = tf.concat(tf.split(k, num_head, axis=<span class="number">2</span>), axis=<span class="number">0</span>)</span><br><span class="line">    v_ = tf.concat(tf.split(v, num_head, axis=<span class="number">2</span>), axis=<span class="number">0</span>)</span><br><span class="line">    tf.logging.info(q_)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算q与k的相似度，sim:[batch_size*num_head,seq_length,seq_length]</span></span><br><span class="line">    sim = tf.matmul(q_, k_, transpose_b=<span class="literal">True</span>)</span><br><span class="line">    sim = sim / (k_.get_shape().as_list()[<span class="number">-1</span>]**<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 利用mask乘以一个特别小的数，避免填补的值对权重的影响。mask有padding mask和seq mask两种</span></span><br><span class="line">    <span class="comment"># 1.padding mask是句子长度不到固定长度的填补标记</span></span><br><span class="line">    masks = tf.to_float(masks)</span><br><span class="line">    pad_mask = tf.tile(tf.expand_dims(masks, axis=<span class="number">1</span>), [<span class="number">1</span>, seq_length, <span class="number">1</span>])  <span class="comment"># [batch_size, seq_length, seq_length]</span></span><br><span class="line">    multi_pad_mask = tf.tile(pad_mask, [num_head, <span class="number">1</span>, <span class="number">1</span>])  <span class="comment"># [batch_size*num_head, seq_length, seq_length]</span></span><br><span class="line">    tf.logging.info(multi_pad_mask)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 2.seq mask是解码器中需要把t时刻后的单词进行覆盖,生成一个下三角</span></span><br><span class="line">    seq_mask = tf.ones_like(masks, dtype=tf.float32)</span><br><span class="line">    seq_mask = tf.linalg.LinearOperatorLowerTriangular(seq_mask).to_dense()  <span class="comment"># 将张量转换为下三角矩阵</span></span><br><span class="line">    multi_seq_mask = tf.tile(tf.expand_dims(seq_mask, axis=<span class="number">1</span>), [<span class="number">1</span>, seq_length, <span class="number">1</span>])</span><br><span class="line">    multi_seq_mask = tf.tile(multi_seq_mask, [num_head, <span class="number">1</span>, <span class="number">1</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># encode只需要padding mask, decode需要padding mask 和 seq</span></span><br><span class="line">    padding = tf.ones_like(sim) * min_num  <span class="comment"># 创造一个与sim具有相同形状的张量，元素全为最小数</span></span><br><span class="line">    <span class="keyword">if</span> type == <span class="string">'encode'</span> <span class="keyword">or</span> type == <span class="string">'encode-decode'</span>:</span><br><span class="line">        sim = tf.where(tf.equal(multi_pad_mask, <span class="literal">True</span>), sim, padding)  <span class="comment"># 如果为真，就保留权重，否则利用最小数代替</span></span><br><span class="line">    <span class="keyword">elif</span> type == <span class="string">'decode'</span>:</span><br><span class="line">        decode_mask = tf.add(multi_pad_mask, multi_seq_mask)</span><br><span class="line">        sim = tf.where(tf.equal(decode_mask, <span class="literal">True</span>), sim, padding)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> ValueError(<span class="string">"please input encode, decode or encode-decode!!!"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 归一化，确保权重之和为1</span></span><br><span class="line">    sim = tf.nn.softmax(sim)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 输出output</span></span><br><span class="line">    output = tf.matmul(sim, v_)         <span class="comment"># 输出output：[batch_size*num_head,seq_length,dim//num_head]</span></span><br><span class="line">    output = tf.concat(tf.split(output, num_head, axis=<span class="number">0</span>), axis=<span class="number">2</span>)  <span class="comment"># 输出output：[batch_size,seq_length,dim]</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+<h3 id="3-layer-norm"><a href="#3-layer-norm" class="headerlink" title="3.layer norm"></a>3.layer norm</h3><p>layer norm:固定一层神经元的均值和方差</p>
+</li>
+<li><p>为什么要进行layer norm？</p>
+<p>  神经网络的权值高度依赖于前一层的输出，当这些输出高度相关时，难以快速收敛</p>
+</li>
+<li><p>计算公式：</p>
+<ol>
+<li>eplsion = 1e-8 </li>
+<li>norm = (input - mean) / ((var + eplsion)**0.5)</li>
+<li>output = alpha * norm + beta</li>
+</ol>
+</li>
+<li><p>具体实现过程：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">layer_norm</span><span class="params">(inputs, eplsion=<span class="number">1e-8</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    layer norm</span></span><br><span class="line"><span class="string">        inputs: [batch_size,seq_length,num_units]</span></span><br><span class="line"><span class="string">        eplsion：防止分母为0</span></span><br><span class="line"><span class="string">        return:  [batch_size,seq_length,num_units]</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    para = inputs.get_shape().as_list()[<span class="number">-1</span>]</span><br><span class="line">    alpha = tf.Variable(tf.ones(para))</span><br><span class="line">    beta = tf.Variable(tf.zeros(para))</span><br><span class="line">    mean, var = tf.nn.moments(inputs, axes=[<span class="number">-1</span>], keep_dims=<span class="literal">True</span>)</span><br><span class="line">    norm = (inputs - mean) / ((var + eplsion) ** <span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 数组中*是按照对应位置相乘的</span></span><br><span class="line">    output = alpha * norm + beta  <span class="comment"># 相当于alpha乘以[batch_size, seq_length], 然后乘以norm:[batch_size,seq_length,dim]</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="4-残差连接"><a href="#4-残差连接" class="headerlink" title="4.残差连接"></a>4.残差连接</h3><ul>
+<li>计算公式：output = input + output(innput)</li>
+<li>确保反向传播求偏导时，梯度至少为1</li>
+</ul>
+<h3 id="5-全连接层-FFN"><a href="#5-全连接层-FFN" class="headerlink" title="5.全连接层(FFN)"></a>5.全连接层(FFN)</h3><ul>
+<li>FFN层相当于一个Relu激活层和一个线性激活层或两个大小为1的一维卷积层</li>
+<li>计算公式： FFN(x) = w_2<em>(max(0, w_1</em>x+b_1)) + b_2</li>
+<li>具体实现过程：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward_feed</span><span class="params">(inputs, num_units_list)</span>:</span></span><br><span class="line">    <span class="string">"""前馈全连接层FFN(x) = w_2*(max(0, w_1*x+b_1)) + b_2</span></span><br><span class="line"><span class="string">    相当于两个大小为1的一维卷积层,二者选择一种方式实现即可</span></span><br><span class="line"><span class="string">    inputs = word Embedding + position Embedding , [batch_size,seq_length,word_dim]</span></span><br><span class="line"><span class="string">    num_units_list: contains two int number ,for example: [2048, 512]</span></span><br><span class="line"><span class="string">    return: [batch_size,seq_length,word_dim]</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># 1.全连接层实现</span></span><br><span class="line">    inner = tf.layers.dense(inputs, units=num_units_list[<span class="number">0</span>], activation=tf.nn.relu)</span><br><span class="line">    output = tf.layers.dense(inner, units=num_units_list[<span class="number">1</span>])  <span class="comment"># 没有激活函数就是线性激活函数层</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 2.卷积层实现</span></span><br><span class="line">    <span class="comment"># 相当于 [batch_size*sequence_length,num_units]*[num_units,ffn_dim]，在reshape成[batch_size,sequence_length,num_units]</span></span><br><span class="line">    <span class="comment"># paras = &#123;"inputs": inputs, "kernel_size": 1, "filter": num_units_list[0], "activation": tf.nn.relu&#125;</span></span><br><span class="line">    <span class="comment"># inner = tf.layers.conv1d(**paras)</span></span><br><span class="line">    <span class="comment"># paras = &#123;"inputs": inner, "kernel_size": 1, "filter": num_units_list[1], "activation": tf.nn.relu&#125;</span></span><br><span class="line">    <span class="comment"># output = tf.layers.conv1d(**output)</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="6-标签平滑"><a href="#6-标签平滑" class="headerlink" title="6.标签平滑"></a>6.标签平滑</h3><ul>
+<li>未经过平滑的标签在进行训练时，容易过拟合，为了增强模型的泛化能力，对标签进行平滑处理</li>
+<li>计算公式：output = (1-alpha) * input + alpha * (1/k)，alpha一般取0.1，k表示类别的数目</li>
+<li>具体实现过程：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">label_smoothing</span><span class="params">(inputs, epsilon=<span class="number">0.1</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    标签平滑</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    v = inputs.get_shape().as_list()[<span class="number">-1</span>]</span><br><span class="line">    output = (<span class="number">1</span>-epsilon)*inputs + epsilon / v</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> output</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p>&#160;&#160;&#160;&#160;阅读transformer论文时借鉴了许多大神的博客，这里就不一一列举了。</p>
+<p>&#160; &#160; &#160; &#160;<a href="https://github.com/lcliuchen123/transformer/blob/fb023bb097e08d53baf25b46a9da490beba51a21/modules.py#L153" target="_blank" rel="noopener">主要参考的transformer代码</a></p>
+<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><ul>
+<li><p>tf.tile(): 复制张量</p>
+</li>
+<li><p>tf.equal(): 逐个元素判断是否相等</p>
+</li>
+<li><p>tf.where(condition, x, y): condition是bool类型，与x,y具有相同的形状。<br>如果condition中元素为True,利用x中对应位置的元素替换，否则，利用y中对应位置的元素替换</p>
+</li>
+<li><p>tf.expand_dims(x,axis=1): 扩展张量维度, 把(2,3,4)扩展为(2,1,3,4)</p>
+</li>
+<li><p>tf.shape():获取变量的维度信息，（包括变量的维度为None)</p>
+</li>
+<li><p>tf.gather(index, object): 提取object中的索引对应的值</p>
+</li>
+<li><p>多头注意力最后的输出有一个线性变换</p>
+</li>
+<li><p>解码器的mask不能相加，只能相乘</p>
+</li>
+<li><p>tensor.shape.ndims: 张量的维度数</p>
+</li>
+<li><p>math.ceil(x): 返回大于x的最小整数</p>
+</li>
+<li><p>math.log(x, di_shu): 以di_shu为底求对数</p>
+</li>
+<li><p>tf.bitcast: 强制改变类型，但是不改变内存中的保存类型,<br><a href="https://tensorflow.google.cn/api_docs/python/tf/bitcast?hl=en" target="_blank" rel="noopener">tf.bitcast官方文档</a></p>
+</li>
+<li><p>tf.bitwise.bitwise_and(x,y): x与y进行与的位运算</p>
+</li>
+<li><p>tf.is_nan:判断某个值是不是非数字的特殊值，返回true或者false</p>
+</li>
+<li><p>tf.gather_nd(object, indices): 提取对应索引中的元素<br><br> indices可以是一个二维张量，比如利用另外一个张量的<br>最大元素对应的索引选择object中的元素，参考<a href="https://www.jianshu.com/p/6e4398d9b4c8" target="_blank" rel="noopener">tf.gather_nd用法</a></p>
+</li>
+<li><p>nest.map_structure: 返回map后的列表</p>
+</li>
+<li><p>tf.greater_equal(x,y): 返回x&gt;=y的值</p>
+</li>
+<li><p>tf.stack(): 增加一个新的维度，<a href="https://zhuanlan.zhihu.com/p/45423615" target="_blank" rel="noopener">tf.stack()与tf.concat()区别</a></p>
+</li>
+<li><p>tf.square(): 对张量的每个数求平方</p>
+</li>
+<li><p>tf.nn.nce_loss：word2vec中的层次softmax函数</p>
+</li>
+<li><p>CPU和GPU都是由计算单元，控制单元和存储单元构成的，区别：</p>
+<ol>
+<li>CPU中三者占比比较均衡，GPU中计算单元较多。</li>
+<li>CPU适合处理单个复杂任务，GPU适合同时处理多个简单任务</li>
+<li>CPU是顺序执行，GPU是并行的。</li>
+<li>TPU（专门针对张量）与同期的CPU和GPU相比，可以提供15-30倍的性能提升，<br>以及30-80倍的效率（性能/瓦特）提升。</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/03/09/note-md/" data-id="ck7jw4tyh00038st913el68ey" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-note" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/03/09/note/" class="article-date">
@@ -219,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/09/note/" data-id="ck7jvk8de000028t95gza95wv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/03/09/note/" data-id="ck7jw4tyi00048st95nsh22x4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,7 +472,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/09/hello-world/" data-id="ck7jvk8dm000128t923qddckf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/03/09/hello-world/" data-id="ck7jw4tyc00018st9g2suaj0n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,9 +492,23 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%EF%BC%9F/" rel="tag">如何部署自己的博客系统？</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%EF%BC%9F/" style="font-size: 10px;">如何部署自己的博客系统？</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -307,6 +525,14 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/03/09/first-blog/">first_blog</a>
+          </li>
+        
+          <li>
+            <a href="/2020/03/09/note-md/">note.md</a>
+          </li>
         
           <li>
             <a href="/2020/03/09/note/">note</a>
