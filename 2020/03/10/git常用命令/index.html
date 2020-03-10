@@ -5,15 +5,17 @@
   
 
   
-  <title>Chen Liu</title>
+  <title>git常用命令 | Chen Liu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对自己的日常学习进行总结">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chen Liu">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="git学习对git有了相对系统的认识，将常用命令进行梳理总结1. 如何在本地创建一个git库并与远程仓库联系起来？2. 如何同时绑定多个远程仓库？3. 查看日志，版本回退4. 分支管理等  git常用命令： git diff: 查看修改的文件内容  git reflog: 记录每次执行的git命令  git log: 查看提交历史  撤销修改  如果在本地(工作区)：git  checkout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git常用命令">
+<meta property="og:url" content="http://yoursite.com/2020/03/10/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="Chen Liu">
-<meta property="og:description" content="对自己的日常学习进行总结">
+<meta property="og:description" content="git学习对git有了相对系统的认识，将常用命令进行梳理总结1. 如何在本地创建一个git库并与远程仓库联系起来？2. 如何同时绑定多个远程仓库？3. 查看日志，版本回退4. 分支管理等  git常用命令： git diff: 查看修改的文件内容  git reflog: 记录每次执行的git命令  git log: 查看提交历史  撤销修改  如果在本地(工作区)：git  checkout">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-10T01:56:57.000Z">
+<meta property="article:modified_time" content="2020-03-10T02:01:54.906Z">
 <meta property="article:author" content="Chen Liu">
 <meta property="article:tag" content="自然语言处理">
 <meta name="twitter:card" content="summary">
@@ -69,9 +71,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-git常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-git常用命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/03/10/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
   <time datetime="2020-03-10T01:56:57.000Z" itemprop="datePublished">2020-03-10</time>
@@ -84,8 +84,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/10/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">git常用命令</a>
+    <h1 class="article-title" itemprop="name">
+      git常用命令
     </h1>
   
 
@@ -207,74 +207,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-first-blog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/09/first-blog/" class="article-date">
-  <time datetime="2020-03-09T03:04:30.000Z" itemprop="datePublished">2020-03-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/09/first-blog/">first_blog</a>
-    </h1>
+    <a href="/2020/03/09/first-blog/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">first_blog</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h1><h2 id="环境：-Win10"><a href="#环境：-Win10" class="headerlink" title="环境： Win10"></a>环境： Win10</h2><h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><ol>
-<li>下载Git,直接去官网下载<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">地址</a></li>
-<li>下载Node.js，同样在官网上下载<a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">地址</a></li>
-<li>启动Git,在命令行中执行以下命令:<code>npm install -g hexo-cli</code>下载Hexo</li>
-<li>找到自己希望放置博客的文件夹下， 执行<code>Hexo init</code></li>
-<li>执行<code>Hexo generate</code>, <code>Hexo deploy</code>,<code>Hexo server</code>, 在浏览器中输入<code>localhost:4000</code>就可以查看。</li>
-<li>要想让别人也看得见，必须将Hexo部署到GitHub上。创建GitHub仓库，名字为user_name.github.io</li>
-<li>利用<code>git remote add origin 远程仓库的地址</code>将本地的仓库添加到远程仓库中</li>
-<li>修改本地目录下的文件_comfig.yml，在最后添加： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repository: https:&#x2F;&#x2F;github.com&#x2F;user_name&#x2F;user_name.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></li>
-<li>然后将目录下的文件上传到远程仓库中：<code>git push -u origin master</code></li>
-<li>执行以下指令完成部署：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></li>
-<li>添加新文章步骤：<ol>
-<li>hexo new <titile> ：   在source/_posts目录下创建md文件</li>
-<li>hexo clean：           清除缓存文件 (db.json) 和已生成的静态文件 (public)。</li>
-<li>hexo generate：        生成静态文件</li>
-<li>hexo deploy：          部署到GitHub上</li>
-</ol>
-</li>
-</ol>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>   部署过程十分简单，如果报错百度就可以解决，本文主要参考了以下文章：</p>
-<ol>
-<li><a href="https://www.imooc.com/wenda/detail/402086" target="_blank" rel="noopener">hexo init命令时，出现错误，该怎么办？</a></li>
-<li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo官方文档</a></li>
-<li><a href="https://www.jianshu.com/p/390f202c5b0e" target="_blank" rel="noopener">5分钟搞定个人博客-hexo</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/09/first-blog/" data-id="ck7l91tg600009ct91b2x95mu" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%EF%BC%9F-%E5%88%A9%E7%94%A8GitHub%E5%92%8CHexo%E6%9E%84%E5%BB%BA/" rel="tag">如何部署自己的博客系统？--利用GitHub和Hexo构建</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-
 
 </section>
         
