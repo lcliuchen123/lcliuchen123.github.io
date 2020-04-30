@@ -5,17 +5,19 @@
   
 
   
-  <title>Chen Liu</title>
+  <title>中文句向量研究 | Chen Liu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="对自己的日常学习进行总结">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chen Liu">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="毕业设计中文文本相似度–句向量整体实验设计(代码)一、文本相似度的三种常用方法&amp;#160; &amp;#160; &amp;#160; &amp;#160;本文主要利用余弦相似度衡量句子之间的相似度，因此如何生成优质的句向量至关重要。    相似度 具体做法    Jaccard系数 分词未分词   编辑距离 最小操作次数   余弦相似度 Word2vec+词+加权平均Word2vec+字+加权平均Word2vec+词+">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中文句向量研究">
+<meta property="og:url" content="http://yoursite.com/2020/04/30/%E4%B8%AD%E6%96%87%E5%8F%A5%E5%90%91%E9%87%8F%E7%A0%94%E7%A9%B6/index.html">
 <meta property="og:site_name" content="Chen Liu">
-<meta property="og:description" content="对自己的日常学习进行总结">
+<meta property="og:description" content="毕业设计中文文本相似度–句向量整体实验设计(代码)一、文本相似度的三种常用方法&amp;#160; &amp;#160; &amp;#160; &amp;#160;本文主要利用余弦相似度衡量句子之间的相似度，因此如何生成优质的句向量至关重要。    相似度 具体做法    Jaccard系数 分词未分词   编辑距离 最小操作次数   余弦相似度 Word2vec+词+加权平均Word2vec+字+加权平均Word2vec+词+">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-04-30T09:56:02.000Z">
+<meta property="article:modified_time" content="2020-04-30T09:58:32.776Z">
 <meta property="article:author" content="Chen Liu">
-<meta property="article:tag" content="自然语言处理">
+<meta property="article:tag" content="句向量在文本相似度上的应用研究">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Chen Liu" type="application/atom+xml">
@@ -69,9 +71,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-中文句向量研究" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-中文句向量研究" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/04/30/%E4%B8%AD%E6%96%87%E5%8F%A5%E5%90%91%E9%87%8F%E7%A0%94%E7%A9%B6/" class="article-date">
   <time datetime="2020-04-30T09:56:02.000Z" itemprop="datePublished">2020-04-30</time>
@@ -84,8 +84,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/30/%E4%B8%AD%E6%96%87%E5%8F%A5%E5%90%91%E9%87%8F%E7%A0%94%E7%A9%B6/">中文句向量研究</a>
+    <h1 class="article-title" itemprop="name">
+      中文句向量研究
     </h1>
   
 
@@ -1539,321 +1539,19 @@ learning_rate = 0.0005
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-data-structure" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/21/data-structure/" class="article-date">
-  <time datetime="2020-03-21T00:51:52.000Z" itemprop="datePublished">2020-03-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/21/data-structure/">data_structure</a>
-    </h1>
+    <a href="/2020/03/21/data-structure/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">data_structure</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="一、位运算总结"><a href="#一、位运算总结" class="headerlink" title="一、位运算总结"></a>一、位运算总结</h1><h2 id="1-常用的位运算符"><a href="#1-常用的位运算符" class="headerlink" title="1.常用的位运算符"></a>1.常用的位运算符</h2><table>
-<thead>
-<tr>
-<th align="center">运算符</th>
-<th align="center">功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">与：&amp;</td>
-<td align="center">相同为1，不同为0</td>
-</tr>
-<tr>
-<td align="center">或：&#124;</td>
-<td align="center">只要有一个为1就为1</td>
-</tr>
-<tr>
-<td align="center">异或：^</td>
-<td align="center">相同为0，不同为1</td>
-</tr>
-<tr>
-<td align="center">左移：&lt;&lt;</td>
-<td align="center">二进制位左移，低位补0，相当于乘以2的幂</td>
-</tr>
-<tr>
-<td align="center">右移：&gt;&gt;</td>
-<td align="center">二进制位右移，高位补0，相当于除以2的幂</td>
-</tr>
-<tr>
-<td align="center">取反：~</td>
-<td align="center">每个位置取相反的，比如1变为0，0变为1</td>
-</tr>
-</tbody></table>
-<h2 id="2-常用的性质"><a href="#2-常用的性质" class="headerlink" title="2.常用的性质"></a>2.常用的性质</h2><ol>
-<li>任意数与1进行与运算，得到的是该数的最后一个二进制位</li>
-<li>异或运算 0 ^ 任意数 = 0, a ^ a =0, a ^ b ^ b=a</li>
-<li>左移相当于乘以2的幂,右移相当于除以2的幂</li>
-<li>正数的最高位为0,补码和反码都与原码相同</li>
-<li>负数的最高位为1,反码的符号位与原码相同,数值位相反;补码是反码加1</li>
-<li>计算机中正数用原码表示，负数用补码表示</li>
-<li>~(a)=-(a+1)</li>
-<li>对正数取反后，得到的是补码(负数用补码表示0)，需要减1得到反码；然后对数值位取反</li>
-<li>对负数取反后，得到的是正数，正数的原码补码反码都一样</li>
-<li>将正数减1后取反可以得到对应的负数，即~(a-1)= -a</li>
-<li>位运算是原码之间进行的，因此a &amp; (~(1&lt;&lt;31)) = a, 可以用来防止数值溢出</li>
-</ol>
-<h1 id="二、图论"><a href="#二、图论" class="headerlink" title="二、图论"></a>二、图论</h1><h2 id="1-深度优先遍历—递归"><a href="#1-深度优先遍历—递归" class="headerlink" title="1.深度优先遍历—递归"></a>1.深度优先遍历—递归</h2><h2 id="2-宽度优先遍历–队列"><a href="#2-宽度优先遍历–队列" class="headerlink" title="2.宽度优先遍历–队列"></a>2.宽度优先遍历–队列</h2><h2 id="3-拓扑排序"><a href="#3-拓扑排序" class="headerlink" title="3.拓扑排序"></a>3.拓扑排序</h2><p>   基本概念：把有向无环图转化为一个线性序列，得到的序列可能不唯一。<br>   如果点A出现在点B前面，则一定不存在点B到点A的路径</p>
-<h2 id="4-连通块"><a href="#4-连通块" class="headerlink" title="4.连通块"></a>4.连通块</h2><h1 id="递归—与动态规划，链表，-图论这些都有重合"><a href="#递归—与动态规划，链表，-图论这些都有重合" class="headerlink" title="递归—与动态规划，链表， 图论这些都有重合"></a>递归—与动态规划，链表， 图论这些都有重合</h1><ul>
-<li>非递归空间：返回地址、参数和局部变量。可能会出现堆栈溢出</li>
-<li>递归空间: 定义的全局变量</li>
-<li>尾递归： return f(x_1) + f(x_2)   c和c++支持尾递归优化，Java和python不支持尾递归优化</li>
-</ul>
-<p>经典例题：</p>
-<ul>
-<li>反转字符串</li>
-<li>杨辉三角</li>
-<li>反转链表</li>
-<li>斐波拉数列</li>
-<li>爬楼梯</li>
-<li><strong>不同的二叉搜索树</strong>：<br>   <br>1.题目描述：寻找1,2,…n生成的不同的二叉搜索树，并按照层次遍历输出<br>   <br>2.思路：假设i为根节点,则左子树是由1,2,…i-1组成的,右子树是由i+1,i+2,…n组成，即满足卡特兰数<br>   <br>3.生成的二叉搜索树的个数就是卡特兰数，h(n)表示第n+1项，h(0)=h(1)=1,<br>   <br>  即h(n) = h(0)h(n) + h(1)h(n-1) + h(2)h(n-2) + …. + h(n)h(0)<br>   <br>4.代码实现(generate_trees(start, end))：<ol>
-<li>遍历所有的节点作为根节点</li>
-<li>递归寻找各个节点的左右子树  </li>
-<li>遍历左右子树,将左右子树与根节点连接起来</li>
-<li>迭代终止条件：start &gt; end ,返回[None,]</li>
-</ol>
-</li>
-</ul>
-<h1 id="三、链表"><a href="#三、链表" class="headerlink" title="三、链表"></a>三、链表</h1><h2 id="1-反转链表"><a href="#1-反转链表" class="headerlink" title="1.反转链表"></a>1.反转链表</h2><h2 id="2-删除链表中的节点"><a href="#2-删除链表中的节点" class="headerlink" title="2.删除链表中的节点"></a>2.删除链表中的节点</h2><h2 id="3-合并链表"><a href="#3-合并链表" class="headerlink" title="3.合并链表"></a>3.合并链表</h2><h2 id="4-循环列表"><a href="#4-循环列表" class="headerlink" title="4.循环列表"></a>4.循环列表</h2><h1 id="四、数组–查询"><a href="#四、数组–查询" class="headerlink" title="四、数组–查询"></a>四、数组–查询</h1><h2 id="1-二分查找法"><a href="#1-二分查找法" class="headerlink" title="1.二分查找法"></a>1.二分查找法</h2><p>##</p>
-<h1 id="五、字符串"><a href="#五、字符串" class="headerlink" title="五、字符串"></a>五、字符串</h1><h2 id="1-最长公共前缀"><a href="#1-最长公共前缀" class="headerlink" title="1.最长公共前缀"></a>1.最长公共前缀</h2><h1 id="六、队列和栈"><a href="#六、队列和栈" class="headerlink" title="六、队列和栈"></a>六、队列和栈</h1><h1 id="七、二叉树"><a href="#七、二叉树" class="headerlink" title="七、二叉树"></a>七、二叉树</h1><h1 id="八、排序算法"><a href="#八、排序算法" class="headerlink" title="八、排序算法"></a>八、排序算法</h1><h1 id="九、动态规划"><a href="#九、动态规划" class="headerlink" title="九、动态规划"></a>九、动态规划</h1>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/21/data-structure/" data-id="ck9mlj4qx0000pgt9fj1c2unu" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A2%86%E6%89%A3%E5%88%B7%E9%A2%98%EF%BC%8C-%E4%BB%A3%E7%A0%81-https-gitee-com-chen-liu-123-project/" rel="tag">领扣刷题，[代码](https://gitee.com/chen_liu_123/project)</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-git常用命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/10/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time datetime="2020-03-10T01:56:57.000Z" itemprop="datePublished">2020-03-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/10/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">git常用命令总结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>git学习对git有了相对系统的认识，将常用命令进行梳理总结<br><br>1. 如何在本地创建一个git库并与远程仓库联系起来？<br><br>2. 如何同时绑定多个远程仓库？<br><br>3. 查看日志，版本回退<br><br>4. 分支管理等</li>
-</ul>
-<h3 id="git常用命令："><a href="#git常用命令：" class="headerlink" title="git常用命令："></a>git常用命令：</h3><ol>
-<li><p>git diff: 查看修改的文件内容</p>
-</li>
-<li><p><strong>git reflog: 记录每次执行的git命令</strong></p>
-</li>
-<li><p>git log: 查看提交历史</p>
-</li>
-<li><p>撤销修改</p>
-<ul>
-<li>如果在本地(工作区)：<br><strong>git  checkout –file_name:<br>  撤销工作区的修改，即恢复被删除的文件<br>  如果没有–，表示切换分支</strong></li>
-<li>如果已经commit(暂存区)：<ol>
-<li>git reset HEAD file_name: 把暂存区的修改撤销，版本回退的前提是没有提交到远程仓库，</li>
-<li>然后再git checkout –file_name</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>删除文件</p>
-<ul>
-<li>rm file_name 删除本地文件</li>
-<li>git rm file_name 删除版本库中的文件，并且git commit</li>
-<li>删除远程仓库中的文件<ol>
-<li>rm file_name</li>
-<li>git commit -m “remove file_name”</li>
-<li>git push origin master</li>
-</ol>
-</li>
-<li>删除远程仓库？？？？？？</li>
-</ul>
-</li>
-<li><p>本地初始化git仓库，添加到远程仓库：<br> git remote add origin <a href="mailto:git@github.com">git@github.com</a>:michaelliao/learngit.git</p>
-<ul>
-<li>git remote rm origin 删除本地仓库与远程的连接</li>
-<li>git push -u: 因为远程仓库为空，第一次push必须要添加-u</li>
-</ul>
-</li>
-<li><p>分支管理</p>
-<ul>
-<li>git branch name创建分支</li>
-<li>git checkout name 切换分支</li>
-<li>git checkout -b name  或git switch -c name 创建并切换分支</li>
-<li>git branch 查看分支，前面带*表示当前分支</li>
-<li>git merge 合并分支</li>
-<li>git branch -d name 删除分支</li>
-<li>git brach -D name 强行删除分支</li>
-<li>git merge发生冲突后，查看冲突文件，并修改对应的内容</li>
-<li>git log –graph 显示分支合并图</li>
-<li>git log –pretty=oneline –abbrev-commit 更清晰显示图</li>
-</ul>
-</li>
-<li><p>实际工作中一般不会在master分支工作，设置分支，在分支上进行工作，然后合并</p>
-<ul>
-<li>修复bug时通常重新建立分支，再分支上修复后再合并，然后删除bug分支</li>
-<li>git pull 拉取远程仓库的代码，强制覆盖本地的代码，<br>防止本地修改丢失，应该使用git stash保存本地的修改</li>
-<li>git stash 缓存未完成的工作</li>
-<li>git stash list 查看缓存的内容</li>
-<li>git stash pop 恢复未完成的内容，并删除stash</li>
-<li>如果master分支有bug, 其余分支也有相同的bug, 可以利用git cherry-pick id 进行修复，id是指commit的id<br>远程仓库的默认名字origin</li>
-<li>git push origin master 把本地分支的所有内容推送到远程分支<br>查看远程库信息，使用git remote -v；</li>
-</ul>
-</li>
-<li><p>本地新建的分支如果不推送到远程，对其他人就是不可见的；</p>
-<ul>
-<li>从本地推送分支，使用git push origin branch-name，</li>
-<li>如果推送失败，先用git pull origin master抓取远程的新提交；</li>
-<li>在本地创建和远程分支对应的分支 git checkout -b branch-name origin/branch-name，<br>本地和远程分支的名称最好一致；</li>
-<li>git pull 失败后提示，可以建立本地分支和远程分支的关联 git branch –set-upstream branch-name origin/branch-name</li>
-<li>从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。</li>
-<li>git rebase 使分支提交历史成为一条直线，更加清晰</li>
-</ul>
-</li>
-<li><p>标签，id一般较长，将版本号与id绑在一起更方便</p>
-<ul>
-<li>git tag name commit_id 创建版本号</li>
-<li>git tag -a name -m 描述信息 commit_id 添加描述信息</li>
-<li>git show name 展示绑定的commit_id信息</li>
-<li>git log 查看标签列表</li>
-<li>删除标签 git tag -d name<br><br>上传到远程仓库 git push origin name<br><br>全部上传 git push origin –tags<br><br>如果上传到远程，需要先删除本地，再删除远程的，删除<br>远程的代码 git push origin :refs/tags/tagname</li>
-</ul>
-</li>
-<li><p>本地仓库可以同时关联多个远程分支</p>
-<ul>
-<li>git init 初始化本地目录为git仓库</li>
-<li>git remote add github <a href="mailto:git@github.com">git@github.com</a>/chen_liu_123/learngit.git </li>
-<li>git remote add origin  <a href="http://gitee.com/chen_liu_123/learngit.git" target="_blank" rel="noopener">http://gitee.com/chen_liu_123/learngit.git</a> </li>
-<li>git push github master</li>
-<li>git push origin master</li>
-</ul>
-</li>
-<li><p>配置git</p>
-<ul>
-<li>给命令设置别名 git config –global alias.ci commit</li>
-<li>global表示为所有的仓库执行相同的命令</li>
-</ul>
-</li>
-<li><p>强制合并 git pull origin master –allow-unrelated-histories</p>
-</li>
-</ol>
-<ul>
-<li>参考网站：<a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">学习网站</a></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/10/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" data-id="ck9mlj4r30003pgt9bg3a7s82" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%AD%A6%E4%B9%A0/" rel="tag">git常用命令学习</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-first-blog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/03/09/first-blog/" class="article-date">
-  <time datetime="2020-03-09T03:04:30.000Z" itemprop="datePublished">2020-03-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/09/first-blog/">first_blog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="部署步骤"><a href="#部署步骤" class="headerlink" title="部署步骤"></a>部署步骤</h1><h2 id="环境：-Win10"><a href="#环境：-Win10" class="headerlink" title="环境： Win10"></a>环境： Win10</h2><h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><ol>
-<li>下载Git,直接去官网下载<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">地址</a></li>
-<li>下载Node.js，同样在官网上下载<a href="https://nodejs.org/zh-cn/download/" target="_blank" rel="noopener">地址</a></li>
-<li>启动Git,在命令行中执行以下命令:<code>npm install -g hexo-cli</code>下载Hexo</li>
-<li>找到自己希望放置博客的文件夹下， 执行<code>Hexo init</code></li>
-<li>执行<code>Hexo generate</code>, <code>Hexo deploy</code>,<code>Hexo server</code>, 在浏览器中输入<code>localhost:4000</code>就可以查看。</li>
-<li>要想让别人也看得见，必须将Hexo部署到GitHub上。创建GitHub仓库，名字为user_name.github.io</li>
-<li>利用<code>git remote add origin 远程仓库的地址</code>将本地的仓库添加到远程仓库中</li>
-<li>修改本地目录下的文件_comfig.yml，在最后添加： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type: git</span><br><span class="line">repository: https:&#x2F;&#x2F;github.com&#x2F;user_name&#x2F;user_name.github.io.git</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure></li>
-<li>然后将目录下的文件上传到远程仓库中：<code>git push -u origin master</code></li>
-<li>执行以下指令完成部署：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></li>
-<li>添加新文章步骤：<ol>
-<li>hexo new <titile> ：   在source/_posts目录下创建md文件</li>
-<li>hexo clean：           清除缓存文件 (db.json) 和已生成的静态文件 (public)。</li>
-<li>hexo generate：        生成静态文件</li>
-<li>hexo deploy：          部署到GitHub上</li>
-</ol>
-</li>
-</ol>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>   部署过程十分简单，如果报错百度就可以解决，本文主要参考了以下文章：</p>
-<ol>
-<li><a href="https://www.imooc.com/wenda/detail/402086" target="_blank" rel="noopener">hexo init命令时，出现错误，该怎么办？</a></li>
-<li><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">hexo官方文档</a></li>
-<li><a href="https://www.jianshu.com/p/390f202c5b0e" target="_blank" rel="noopener">5分钟搞定个人博客-hexo</a></li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/03/09/first-blog/" data-id="ck9mlj4r10001pgt98dkwd248" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A6%82%E4%BD%95%E9%83%A8%E7%BD%B2%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F%EF%BC%9F-%E5%88%A9%E7%94%A8GitHub%E5%92%8CHexo%E6%9E%84%E5%BB%BA/" rel="tag">如何部署自己的博客系统？--利用GitHub和Hexo构建</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
 
 </section>
         
